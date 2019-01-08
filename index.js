@@ -44,15 +44,49 @@ var handle = {};
 handle["/semantic.min.css"] = semantic_css;
 handle["/semantic.min.js"] = semantic_js;
 handle["/jquery.min.js"] = jquery;
-
+handle["/outline-icons.woff2"] = outline_icons;
+handle["/icons.woff2"] = icons;
+handle["/S6uyw4BMUTPHjx4wXg.woff2"] = xx;
 start(route, handle);
 console.log("Server running at http://localhost:%d", port);
+
+
+function xx(response, data) {
+    var filePath = path.join(__dirname, 'S6uyw4BMUTPHjx4wXg.woff2');
+    var stat = fileSystem.statSync(filePath);
+    response.writeHead(200, {
+        'Content-Length': stat.size,
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(response);
+}
+
+function icons(response, data) {
+    var filePath = path.join(__dirname, 'icons.woff2');
+    var stat = fileSystem.statSync(filePath);
+    response.writeHead(200, {
+        'Content-Length': stat.size,
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(response);
+}
+
+
+function outline_icons(response, data) {
+    var filePath = path.join(__dirname, 'outline-icons.woff2');
+    var stat = fileSystem.statSync(filePath);
+    response.writeHead(200, {
+        'Content-Length': stat.size,
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(response);
+}
+
 
 function semantic_css (response, data) {
     var filePath = path.join(__dirname, 'semantic.min.css');
         var stat = fileSystem.statSync(filePath);
         response.writeHead(200, {
-            'Content-Type': 'text/css',
             'Content-Length': stat.size,
         });
         var readStream = fileSystem.createReadStream(filePath);
@@ -63,7 +97,6 @@ function jquery (response, data) {
     var filePath = path.join(__dirname, 'jquery.min.js');
         var stat = fileSystem.statSync(filePath);
         response.writeHead(200, {
-            'Content-Type': 'text/css',
             'Content-Length': stat.size,
         });
         var readStream = fileSystem.createReadStream(filePath);
