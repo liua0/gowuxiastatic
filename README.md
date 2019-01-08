@@ -1,8 +1,6 @@
-# Python Flask app on Azure Web App for Containers
+# Node.js Hello World
 
-This is a minimal sample app that demonstrates how to run a Python Flask application on Azure App Service on Linux.
-
-For more information, please see the [Python on App Service quickstart](https://docs.microsoft.com/en-us/azure/app-service/containers/quickstart-python).
+This sample demonstrates a tiny Hello World node.js app for [App Service Web App](https://docs.microsoft.com/azure/app-service-web).
 
 # Contributing
 
