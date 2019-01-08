@@ -18,6 +18,8 @@ var port = process.env.PORT || 1337;
 // console.log("Server running at http://localhost:%d", port);
 var http = require("http");
 var url = require("url");
+fileSystem = require('fs'),
+path = require('path');
 function route (handle, pathname, response, data) {
     if(typeof handle[pathname] === 'function'){
         handle[pathname](response, data);
@@ -39,23 +41,30 @@ function start (route, handle) {
 }
 
 var handle = {};
-handle["/"] = one;
+handle["/semantic.min.css"] = semantic;
+handle["/jquery.min.js"] = jquery;
 
 start(route, handle);
 console.log("Server running at http://localhost:%d", port);
 
-function one (response, data) {
-    var body = '<html>' + 
-        '<head>' +
-        '<meta http-equiv-"Content-Type" content="text/html;charset=UTF-8"/>' +
-        '</head>' +
-        '<body>' +
-        '<a href="/two">two</a>' +
-        '</body>'+
-        '</html>';
+function semantic (response, data) {
+    var filePath = path.join(__dirname, 'semantic.min.css');
+        var stat = fileSystem.statSync(filePath);
+        response.writeHead(200, {
+            'Content-Type': 'text/css',
+            'Content-Length': stat.size,
+        });
+        var readStream = fileSystem.createReadStream(filePath);
+        readStream.pipe(response);
+}
 
-    response.writeHead(200, {"Content-Type": "text/html"});
-    //当Content-Type为"text/plain"时，返回的内容将直接显示
-    response.write(body);
-    response.end(); 
+function jquery (response, data) {
+    var filePath = path.join(__dirname, 'jquery.min.js');
+        var stat = fileSystem.statSync(filePath);
+        response.writeHead(200, {
+            'Content-Type': 'text/css',
+            'Content-Length': stat.size,
+        });
+        var readStream = fileSystem.createReadStream(filePath);
+        readStream.pipe(response);
 }
