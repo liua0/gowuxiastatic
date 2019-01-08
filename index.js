@@ -45,7 +45,7 @@ handle["/semantic.min.css"] = semantic_css;
 handle["/semantic.min.js"] = semantic_js;
 handle["/jquery.min.js"] = jquery;
 handle["/outline-icons.woff2"] = outline_icons;
-handle["/icons.woff2"] = icons;
+handle["/themes/default/assets/fonts/icons.woff2"] = icons;
 handle["/S6uyw4BMUTPHjx4wXg.woff2"] = xx;
 start(route, handle);
 console.log("Server running at http://localhost:%d", port);
