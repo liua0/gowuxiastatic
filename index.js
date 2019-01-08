@@ -15,7 +15,6 @@
 // });
 
 var port = process.env.PORT || 1337;
-
 // console.log("Server running at http://localhost:%d", port);
 var server = require("./server");
 var router = require("./router");
@@ -26,3 +25,4 @@ handle["/one"] = requestHandlers.one;
 handle["/two"] = requestHandlers.two;
 
 server.start(router.route, handle);
+console.log("Server running at http://localhost:%d", port);
