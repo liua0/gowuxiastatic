@@ -1,7 +1,8 @@
-const express = require('express')
-const app = express()
+var express = require("express");
+var app = express();
+app.use("/",express.static(__dirname + "/public"));
+app.listen(port);
+
 var port = process.env.PORT || 1337;
 
-app.use("/",express.static(__dirname + "/public"));
-
-app.listen(port)
+console.log("Server running at http://localhost:%d", port);

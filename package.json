@@ -7,8 +7,5 @@
     "author": "Microsoft",
     "scripts": {
         "start": "node index.js"
-    },
-    "dependencies": {
-        "express": "^4.16.4"
     }
 }
