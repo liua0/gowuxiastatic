@@ -1,9 +1,16 @@
-var http = require('http');
+var http = require('http'),
+    fileSystem = require('fs'),
+    path = require('path');
 
 var server = http.createServer(function(request, response) {
-
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World!");
+    var filePath = path.join(__dirname, 'semantic.min.css');
+    var stat = fileSystem.statSync(filePath);
+    response.writeHead(200, {
+        'Content-Type': 'text/css',
+        'Content-Length': stat.size,
+    });
+    var readStream = fileSystem.createReadStream(filePath);
+    readStream.pipe(response);
 
 });
 
