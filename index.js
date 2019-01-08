@@ -41,13 +41,14 @@ function start (route, handle) {
 }
 
 var handle = {};
-handle["/semantic.min.css"] = semantic;
+handle["/semantic.min.css"] = semantic_css;
+handle["/semantic.min.js"] = semantic_js;
 handle["/jquery.min.js"] = jquery;
 
 start(route, handle);
 console.log("Server running at http://localhost:%d", port);
 
-function semantic (response, data) {
+function semantic_css (response, data) {
     var filePath = path.join(__dirname, 'semantic.min.css');
         var stat = fileSystem.statSync(filePath);
         response.writeHead(200, {
@@ -60,6 +61,17 @@ function semantic (response, data) {
 
 function jquery (response, data) {
     var filePath = path.join(__dirname, 'jquery.min.js');
+        var stat = fileSystem.statSync(filePath);
+        response.writeHead(200, {
+            'Content-Type': 'text/css',
+            'Content-Length': stat.size,
+        });
+        var readStream = fileSystem.createReadStream(filePath);
+        readStream.pipe(response);
+}
+
+function semantic_js(response, data) {
+    var filePath = path.join(__dirname, 'semantic.min.js');
         var stat = fileSystem.statSync(filePath);
         response.writeHead(200, {
             'Content-Type': 'text/css',
